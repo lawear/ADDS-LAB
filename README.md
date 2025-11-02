@@ -23,8 +23,8 @@ ADDS-LAB/
 ![Windows Server 2022](https://img.shields.io/badge/Windows%20Server%202022-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 ![Windows 11](https://img.shields.io/badge/Windows%2011-0078D6?style=for-the-badge&logo=windows11&logoColor=white)
 ![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+[Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
+[License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
 ---
 

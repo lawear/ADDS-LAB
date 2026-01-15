@@ -50,14 +50,14 @@ touch scripts/.gitkeep
 
 ### Setup Steps :
  # ACTIVE DIRECTORY INSTALL
-a.Select “Add Roles and Features” from Server Manager Dashboard
-b.Run through the installation wizard leaving “Role-based or feature-based” selected.
-c.Select Server you want to install the Services on if there are multiple.
-d.Select Active Directory Domain Services,DNS Server,DHCP Server and Remote Access.
-e.Confirm and Install
+-Select “Add Roles and Features” from Server Manager Dashboard
+-Run through the installation wizard leaving “Role-based or feature-based” selected.
+-Select Server you want to install the Services on if there are multiple.
+-Select Active Directory Domain Services,DNS Server,DHCP Server and Remote Access.
+-Confirm and Install
 
 
-
+<img width="2871" height="1731" alt="Naming my Domain" src="https://github.com/user-attachments/assets/2bddfa06-e058-4224-8c9f-13788b7fb0af" />
 
 
 .<img width="3150" height="1758" alt="Ready to Install Roles and features" src="https://github.com/user-attachments/assets/a49dc094-d992-4a19-af78-62d4e18b9653" />

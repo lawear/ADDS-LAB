@@ -1,4 +1,3 @@
-#  Active Directory Lab in VMware
 
 ## Project: Virtualized AD DS Lab
 Description: Windows Server 2022 DC acting as a DNS/DHCP server and NAT Router, bridging a VMware NAT interface to an isolated LAN Segment for Windows 11 client connectivity.
@@ -49,7 +48,20 @@ touch README.md
 touch screenshots/.gitkeep
 touch scripts/.gitkeep
 
-### Setup Steps
+### Setup Steps :
+ # ACTIVE DIRECTORY INSTALL
+a.Select “Add Roles and Features” from Server Manager Dashboard
+b.Run through the installation wizard leaving “Role-based or feature-based” selected.
+c.Select Server you want to install the Services on if there are multiple.
+d.Select Active Directory Domain Services,DNS Server,DHCP Server and Remote Access.
+e.Confirm and Install
+
+
+
+
+
+.<img width="3150" height="1758" alt="Ready to Install Roles and features" src="https://github.com/user-attachments/assets/a49dc094-d992-4a19-af78-62d4e18b9653" />
+
 
 ### 
 

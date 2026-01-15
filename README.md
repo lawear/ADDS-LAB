@@ -3,7 +3,7 @@
 Description: Designed and deployed a Windows Server 2022 DC acting as a DNS/DHCP server and NAT Router, bridging a VMware NAT interface to an isolated LAN Segment for Windows 11 client connectivity.
 
 
-##  Lab Overview
+**Lab Overview**
 
 | Component | Description |
 |------------|-------------|
@@ -15,11 +15,12 @@ Description: Designed and deployed a Windows Server 2022 DC acting as a DNS/DHCP
 ---
 
 
+**Pre-VM Install Settings:**
 
 <img width="1923" height="1196" alt="VM Settingss" src="https://github.com/user-attachments/assets/65b89cc3-10af-4864-bcae-e4042e2f275e" />
 
 
-## Network Configuration
+**Network Configuration**
 
 | VM | Adapter 1 | Adapter 2 | Configuration|
 |----|------------|-----------|----------|
@@ -30,7 +31,7 @@ Description: Designed and deployed a Windows Server 2022 DC acting as a DNS/DHCP
 
 
 
-Pre- VM Install Settings
+**Network Interface Settings**
 
 <img width="2439" height="1323" alt="Netwaork Settings" src="https://github.com/user-attachments/assets/80ce2dfb-a27f-4483-8b74-4227b54c7a0f" />
 
@@ -49,7 +50,7 @@ touch screenshots/.gitkeep
 touch scripts/.gitkeep
 
 ### Setup Steps:
- ### INSTALL ACTIVE DIRECTORY & PROMOTE TO DC
+**INSTALL ACTIVE DIRECTORY & PROMOTE TO DC**
 -Select “Add Roles and Features” from Server Manager Dashboard.
 
 -Run through the installation wizard leaving “Role-based or feature-based” selected.
@@ -58,34 +59,34 @@ touch scripts/.gitkeep
 
 -Select Active Directory Domain Services,DNS Server,DHCP Server and Remote Access.
 
--Confirm and Install
 
 
 
 
+**Confirm Selections and Install**
 
 .<img width="3150" height="1758" alt="Ready to Install Roles and features" src="https://github.com/user-attachments/assets/a49dc094-d992-4a19-af78-62d4e18b9653" />
 
 
-
+**Select "Promote this Server to Domain Controller"**
 ---<img width="3072" height="1740" alt="Promote Server to DC" src="https://github.com/user-attachments/assets/6ce765c8-c84c-4fc7-b464-46171e09ac76" />
 
 
 ### 
-Promote to Domain Controller:
-Select "Add New Forest and give a name including domain extension eg. ".com" or ".local"
+
+**Select "Add New Forest and give a name including domain extension eg. ".com" or ".local"**
 
 <img width="2871" height="1731" alt="Naming my Domain" src="https://github.com/user-attachments/assets/462adc4e-2cd1-4da6-9ea7-38c14123bd11" />
 
 
 
-
+**Promotion Successful**
 <img width="3249" height="1983" alt="After Restart" src="https://github.com/user-attachments/assets/f12e3460-ca59-4a9d-a95c-18c50a0d122e" />
 
 
 
 
-
+**ADUAC**
 
 <img width="2970" height="1842" alt="Users and Computers" src="https://github.com/user-attachments/assets/ef43a142-1ed8-4e0d-814a-e8e4c3ff492f" />
 

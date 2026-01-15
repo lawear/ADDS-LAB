@@ -14,6 +14,8 @@ Description: Windows Server 2022 DC acting as a DNS/DHCP server and NAT Router, 
 | **VM Resources** | 2 CPUs, 4 GB RAM, 30 GB HDD each |
 
 ---
+<img width="2958" height="1839" alt="VM Settings" src="https://github.com/user-attachments/assets/a7e0f69b-9495-4a79-b996-9e59ac8cd474" />
+
 
 ## 🌐 Network Configuration
 
@@ -37,22 +39,11 @@ touch scripts/.gitkeep
 
 ## 🏗️ Setup Steps
 
-### 1️⃣ Prepare the Environment
-- Install **VMware** on your host PC.  
-- Download ISO images for:
-  - **Windows Server 2022**
-  - **Windows 11**
+### 
 
 ---
 
-### 2️⃣ Create Virtual Machines
-Create two VMs and assign resources:
-
-| VM Name | OS | CPU | RAM | HDD | Notes |
-|----------|----|-----|-----|-----|-------|
-| `DC-Server2022` | Windows Server 2022 | 2 | 2 GB | 30 GB | Domain Controller |
-| `Client-Win11` | Windows 11 | 2 | 2 GB | 30 GB | Domain-Joined Client |
-
+### 
 📸 *Screenshot Placeholder:*  
 `![VM Settings](./screenshots/vm-settings.png)`
 

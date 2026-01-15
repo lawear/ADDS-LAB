@@ -24,6 +24,11 @@ Description: Windows Server 2022 DC acting as a DNS/DHCP server and NAT Router, 
 | **Domain Controller (DC)** | NAT(Routing) | LAN Segment| Static IP|
 | **Windows 11 Client** | -- | LAN Segment| InternetAccess & DHCP via DC |
 
+<img width="1296" height="1473" alt="D_NY" src="https://github.com/user-attachments/assets/2e64bd45-84b9-455e-8cab-0b788c47a6d4" />  <img width="1251" height="1782" alt="NETSTAT" src="https://github.com/user-attachments/assets/86576e33-9b64-4421-b345-0c354b34d34b" />
+
+
+
+
 
 
 ---

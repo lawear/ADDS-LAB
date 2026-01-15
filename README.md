@@ -48,17 +48,17 @@ touch README.md
 touch screenshots/.gitkeep
 touch scripts/.gitkeep
 
-### Setup Steps :
- # ACTIVE DIRECTORY INSTALL
--Selected “Add Roles and Features” from Server Manager Dashboard.
+### Setup Steps:
+ ### INSTALL ACTIVE DIRECTORY & PROMOTE TO DC
+-Select “Add Roles and Features” from Server Manager Dashboard.
 
--Ran through the installation wizard leaving “Role-based or feature-based” selected.
+-Run through the installation wizard leaving “Role-based or feature-based” selected.
 
--Selected Server(DC_NY)
+-Select Server(DC_NY)
 
--Selected Active Directory Domain Services,DNS Server,DHCP Server and Remote Access.
+-Select Active Directory Domain Services,DNS Server,DHCP Server and Remote Access.
 
--Confirmed and Installed
+-Confirm and Install
 
 
 
@@ -68,8 +68,12 @@ touch scripts/.gitkeep
 
 
 ### 
+Promote to Domain Controller:
+Select "Add New Forest and give a name including domain extension eg. ".com" or ".local"
 
----
+
+---<img width="3072" height="1740" alt="Promote Server to DC" src="https://github.com/user-attachments/assets/6ce765c8-c84c-4fc7-b464-46171e09ac76" />
+
 
 ### 
 📸 *Screenshot Placeholder:*  

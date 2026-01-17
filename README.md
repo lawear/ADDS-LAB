@@ -44,7 +44,6 @@ touch README.md
 touch screenshots/.gitkeep
 touch scripts/.gitkeep
 
-### Setup Steps:
 **Roles and Server Installations**
 Access the Server Manager Dashboard to begin the service provisioning.
 
@@ -55,11 +54,10 @@ Access the Server Manager Dashboard to begin the service provisioning.
 3.Target Server: DC_NY.
 
 4.Select the following roles:
-  -Active Directory Domain Services (AD-DS)
-  -DNS Server
-  -DHCP Server
-  -Remote Access (Required for NAT/Routing)
-
+  *Active Directory Domain Services (AD-DS)
+  *DNS Server
+  *DHCP Server
+  *Remote Access (Required for NAT/Routing)
 
 
 

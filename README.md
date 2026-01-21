@@ -239,9 +239,21 @@ ADDS-LAB/
 
 ---
 
-## 🧰 Overview
-This project documents my **Active Directory home lab** built on VMware Workstation to strengthen system administration skills.  
-It includes setup steps, PowerShell configuration, and screenshots of domain controller and client integration.
+
+Title Idea: Building a Secure Active Directory Lab: A Step-by-Step Virtualization Guide
+Subtitle: Master Windows Server 2022, NAT Routing, and Client Integration using VMware.
+
+The Vision
+In the world of System Administration, understanding the backbone of enterprise identity management—Active Directory Domain Services (AD-DS)—is essential. I decided to build a fully functional, isolated laboratory environment to simulate a real-world corporate network.
+
+My goal was simple: Create a secure, multihomed environment where a Windows Server 2022 Domain Controller acts as the gateway for internal clients, providing DNS, DHCP, and NAT Routing.
+The Blueprint: Network Topology
+Before touching any ISO files, I mapped out the architecture. The lab relies on a dual-homed Domain Controller that bridges the gap between the internet and a private LAN segment.
+
+Component,Role,Network Configuration
+Domain Controller,Gateway / DNS / DHCP,Adapter 1 (NAT) & Adapter 2 (LAN Segment)
+Windows 11 Client,End-User Workstation,LAN Segment (Isolated)
+
 
 
 ### Folder Descriptions

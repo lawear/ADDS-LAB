@@ -1,15 +1,19 @@
-### Project: Virtualized AD-DS Laboratory Environment
-## Version: 1.0
-
-#### Focus: 
-Windows Server 2022, Network Infrastructure, and Client Integration
-
-## Summary
-This project outlines the design and deployment of a virtualized Active Directory Domain Services (AD-DS) environment. The architecture utilizes a Windows Server 2022 Domain Controller (DC) configured as a multihomed gateway. It provides DNS, DHCP, and NAT Routing services, bridging an external VMware NAT interface to an isolated internal LAN segment for secure client connectivity.
-screenshots
 
 
-### VMware Settings
+**Building a Secure Active Directory Lab to master Windows Server 2022, NAT Routing, and Client Integration using VMware.
+**
+
+**Prerequisite Checklist:**
+**ISO Media**: Server 22 iso & windows 11 iso
+
+**DC-SVR2022**: A clean installation of standard Windows Server 2022 with Desktop Experience.
+
+**PC1 & PC2**: A clean installation of Windows 11 Pro.
+
+
+
+
+**VMware Specificatios**:
 | Component | Description |
 |------------|-------------|
 | **Hypervisor** | VMware Workstation |
@@ -19,32 +23,148 @@ screenshots
 
 ---
 
-<img width="1923" height="1196" alt="VM Settingss" src="https://github.com/user-attachments/assets/65b89cc3-10af-4864-bcae-e4042e2f275e" />
 
 
-**Network Topology**
+**Network Flow Logic:**
 | VM | Adapter 1 | Adapter 2 | Configuration|
 |----|------------|-----------|----------|
-| **Domain Controller (DC)** | NAT(Routing) | LAN Segment| Static IP|
+| **Domain Controller (DC)** | NAT(Routing) | LAN Segment|Static IP|
 | **Windows 11 Client** | -- | LAN Segment| InternetAccess & DHCP via DC |
 
+**Phase 1:** Server Provisioning and AD DS Promotion
+The foundation of the environment begins with the installation of core server roles and the establishment of a new Active Directory forest.
+
+1.1 Role Installation
+Before configuring specific services, Active Directory Domain Services (AD DS), DHCP, and DNS roles must be enabled.
+
+Figure 1.1:
+Displays the confirmation screen for the selected roles before the installation process begins.
+
+<img width="3150" height="1758" alt="Ready to Install Roles and features" src="https://github.com/user-attachments/assets/25106061-fa42-49f5-a821-bea24fbec25d" />
+ 
+
+Figure 1.2: Highlights the post-deployment configuration link in Server Manager required to elevate the server to a Domain Controller.
+
+  <img width="3072" height="1740" alt="Promote Server to DC" src="https://github.com/user-attachments/assets/3e763780-ed8f-4d8f-9f07-e822a5f194f6" />
+
+
+1.2 Forest Creation
+A new forest is established to provide the identity and security boundary for the lab.
+
+Figure 1.3: Shows the "Add a new forest" operation with the Root domain name set to Pawplicity.com
+
+<img width="2871" height="1731" alt="Naming my Domain" src="https://github.com/user-attachments/assets/cf12dbbf-0bbe-4fd8-8007-adc48cae31ac" />
+
+Figure 1.4:Displays the Windows login screen showing the PAWPLICITY\Administrator account, confirming the domain is active.
+ 
+ <img width="3249" height="1983" alt="After Restart" src="https://github.com/user-attachments/assets/e1a578b1-409e-4b0a-a7ef-ee619c657b25" />
+
+
+Phase 2: Internal Network Management (DHCP)
+To manage the LAN Segment, the Domain Controller (DC) is configured to automate IP distribution to client workstations.
+
+2.1 DHCP Authorization
+To prevent rogue servers, the DHCP service must be authorized within Active Directory.
+
+Figure 2.1: The summary screen showing successful creation of security groups and server authorization.
+
+<img width="1629" height="1707" alt="DHCP Post-Install" src="https://github.com/user-attachments/assets/9b1beb40-c0ab-46eb-87eb-84e18495e29c" />
+
+Figure 2.2:  The DHCP management console displaying a green checkmark, indicating the server is authorized and active.
+
+<img width="1968" height="1626" alt="Auth Successful" src="https://github.com/user-attachments/assets/0f1acbbc-e049-4c18-be5b-8b4a2b3b3e33" />
+
+2.2 Scope Configuration
+The DHCP scope defines the addressing logic for all internal assets.
+
+Figure 2.3: Defining the scope name: Range: 10 to 10.5.10.20 .5.10.250.
+
+<img width="1680" height="1560" alt="DHCP Scope_Name and Description" src="https://github.com/user-attachments/assets/0fc63fb4-f106-42b5-87fd-e45dcfa2858b" />
+
+
+Figure 2.4: Configuring the IP range from 10.5.10.20 to 10.5.10.250 with a /24 subnet mask.
+
+<img width="1146" height="1140" alt="DHCP Scope Options- Setting the instructions" src="https://github.com/user-attachments/assets/524514fc-83e6-41cc-bbf5-883d89c286e9" />
+
+Figure 2.5: Setting the DNS server to 10.5.10.5 to ensure clients can resolve the domain.
+
+<img width="1752" height="1347" alt="DNS Server(DC) so I can join Clients to domain" src="https://github.com/user-attachments/assets/3b631fd8-6893-4cfb-97fa-b7a23c7a1dc9" />
+
+
+Figure 2.6:Defining the Default Gateway as 10.5.10.5 so clients know where to send external traffic.
+
+<img width="1644" height="1368" alt="NAT Gateway for Client Machines to reach internet" src="https://github.com/user-attachments/assets/23bf95ae-d727-4e20-a085-c4dcef802032" />
+
+Phase 3: Routing and Remote Access (NAT)
+To bridge the private LAN Segment to the internet, we implement Network Address Translation (NAT) on the dual-homed Domain Controller.
+
+3.1 Interface Identification
+The DC utilizes two network adapters to act as a gateway between the internal and external worlds.
+
+Figure 3.1:  A view of the "Network Connections" window showing both the NAT (External) and LAN Segment (Internal) adapters.
+
+<img width="2946" height="822" alt="Network Adapters" src="https://github.com/user-attachments/assets/7b9bd6ca-5c29-4d46-b724-953e1e746d87" />
+
+Figure 3.2: Detailed IP status of the internal adapter, labeled DC_NY.
+
+<img width="2439" height="1323" alt="Netwaork Settings" src="https://github.com/user-attachments/assets/ddd2b960-a920-4d6f-a53f-731cd72bd442" />
+
+
+Figure 3.3: Verification of the static IP configuration on the internal interface.
+
+<img width="1296" height="1473" alt="D_NY" src="https://github.com/user-attachments/assets/fdf4060e-da84-4d2b-9aa5-789e9ed7b48f" />
+
+
+3.2 NAT Implementation
+Using the Routing and Remote Access (RRAS) console, the server is transformed into a functional router.
+
+Figure 3.4:  Initializing the "Configure and Enable Routing and Remote Access" wizard.
+
+<img width="1419" height="1104" alt="Configuring NAT Routing" src="https://github.com/user-attachments/assets/1adf6c3a-2a63-440c-ab8d-ef7ea22b27fe" />
+
+Figure 3.5: Selecting the "Network address translation (NAT)" radio button.
+ 
+<img width="1377" height="1218" alt="Select NAT Option" src="https://github.com/user-attachments/assets/0a985647-cbb8-47cd-a340-141154ca672e" />
+
+Figure 3.6: The final confirmation screen showing NAT is configured for the external interface.
+ 
+<img width="1368" height="1023" alt="Finish Routing NAT RoutingConfig" src="https://github.com/user-attachments/assets/f84926d2-be2e-4018-a45f-92f94421f028" />
+
+Figure 3.7: The RRAS console showing the service status as active (Green).
+
+<img width="1269" height="981" alt="Looking for green(Up and Running)" src="https://github.com/user-attachments/assets/ea306751-306d-4269-a341-986178890c59" />
+
+Phase 4: Client Integration and Verification
+The final phase confirms the Network Flow Logic by verifying client connectivity and internet access.
+
+4.1 Client Network Acquisition
+Workstations on the LAN Segment should automatically receive their configuration from the DC.
+
+Figure 4.1: A Windows 11 client terminal running ipconfig /all, showing an assigned IP of 10.5.10.22 and the DHCP server as 10.5.10.5.
+
+<img width="2556" height="1770" alt="ClientPCs have internet Access  Not on Domain Yet but under the same subnet" src="https://github.com/user-attachments/assets/8de8b5a5-8fcb-48d0-9adb-910adb2d6ef0" />
+
+Figure 4.2: A web browser successfully loading Google, confirming the NAT routing is functional.
+[Internet Access Verification] — 
+
+4.2 Active Directory Verification
+The last step is ensuring the client is recognized within the domain database.
+
+Figure 4.3: A view of "Active Directory Users and Computers" showing the Windows 11 machine listed in the "Computers" container.
 
 
 
-**Network Interface Settings**
-<img width="2439" height="1323" alt="Netwaork Settings" src="https://github.com/user-attachments/assets/80ce2dfb-a27f-4483-8b74-4227b54c7a0f" />
+
+
+
+
+
+
+
 
 
 ---
-CREATE FOLDERS STRUCTURE.
 
-
-mkdir -p AD-Lab/screenshots
-mkdir -p AD-Lab/scripts
-cd AD-Lab
-touch README.md
-touch screenshots/.gitkeep
-touch scripts/.gitkeep
 
 ##Roles and Server Installations##
 Access the Server Manager Dashboard to begin the service provisioning.
@@ -63,39 +183,12 @@ Access the Server Manager Dashboard to begin the service provisioning.
 
 
 
-**Confirm Selections and Install**
-
-.<img width="3150" height="1758" alt="Ready to Install Roles and features" src="https://github.com/user-attachments/assets/a49dc094-d992-4a19-af78-62d4e18b9653" />
-
-
-**Select "Promote this Server to Domain Controller"**
----<img width="3072" height="1740" alt="Promote Server to DC" src="https://github.com/user-attachments/assets/6ce765c8-c84c-4fc7-b464-46171e09ac76" />
-
-
-### 
-
-**Select "Add New Forest and give a name including domain extension eg. ".com" or ".local"**
-
-<img width="2871" height="1731" alt="Naming my Domain" src="https://github.com/user-attachments/assets/462adc4e-2cd1-4da6-9ea7-38c14123bd11" />
-
-
-
-**Promotion Successful**
-<img width="3249" height="1983" alt="After Restart" src="https://github.com/user-attachments/assets/f12e3460-ca59-4a9d-a95c-18c50a0d122e" />
 
 
 
 
-**ADUAC**
-
-<img width="2970" height="1842" alt="Users and Computers" src="https://github.com/user-attachments/assets/ef43a142-1ed8-4e0d-814a-e8e4c3ff492f" />
-
-
-
-
-
-### Configuring a DHCP Scope
-The DHCP service automates the assignment of IP addresses, subnet masks, and other network parameters to client machines. To initialize this service, an administrator must define a Scope—a consecutive range of possible IP addresses for a network.
+### Authorizing and Configuring a DHCP Scope
+The DHCP service automates the assignment of IP addresses, subnet masks, and other network parameters to client machines. To initialize this service, an administrator must define a Scope—a consecutive range of possible IP addresses for a network.DHCP must be authorized before it is operational.
 
 Initialization: Within the Server Manager, navigate to Tools > DHCP. In the management console, right-click IPv4 and initiate the New Scope Wizard.
 
@@ -125,118 +218,6 @@ Interface Mapping: Select the External/Public Network Interface Card (NIC). This
 Completion: Finalize the setup to enable the routing of traffic from the internal private network to the external public network.                                            
 
 
-
-
-
-
-
-### 
-📸 *Screenshot Placeholder:*  
-`![VM Settings](./screenshots/vm-settings.png)`
-
----
-
-### 3️⃣ Install Operating Systems
-- Mount the downloaded ISOs in each VM.
-- Choose **Custom installation** for partition setup.
-- For Windows Server:
-  - Select **Desktop Experience (GUI)**.
-  - Set an **Administrator password**.
-
-📸 *Screenshot Placeholder:*  
-`![Windows Server Installation](./screenshots/server-installation.png)`
-
----
-
-### 4️⃣ Configure Networking
-**Domain Controller (DC):**
-- Adapter 1 → NAT  
-- Adapter 2 → Host-Only  
-
-**Windows 11 Client:**
-- Adapter 1 → Host-Only  
-
-📸 *Screenshot Placeholder:*  
-`![Network Configuration](./screenshots/network-config.png)`
-
----
-
-## 🧩 Active Directory Setup
-
-### 5️⃣ Install and Configure AD DS (PowerShell)
-On the **DC VM**, open PowerShell as Administrator:
-
-```powershell
-# Install ADDS Role
-Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
-
-# Configure new forest
-Install-ADDSForest -DomainName "homelab.local"
-
-Reboot after promotion and log in as the new Domain Admin.
-
-📸 Screenshot Placeholder:
-![AD DS Installation](./screenshots/adds-install.png)
-
-#Add Users via PowerShell
-
-Example command to create a test user:
-
-New-ADUser -Name "John Doe" `
--AccountPassword (ConvertTo-SecureString "P@ssword123" -AsPlainText -Force) `
--Enabled $true
-
-📸 Screenshot Placeholder:
-![Add AD User](./screenshots/add-user.png)
-
-💻 Join Windows 11 Client to Domain
-
-Change the client’s DNS to the DC’s Host-Only IP (e.g. 192.168.56.10).
-
-Go to:
-
-Settings → System → About → Rename this PC (Advanced)
-
-
-Enter the domain name:
-
-homelab.local
-
-
-Provide domain credentials to join.
-
-📸 Screenshot Placeholder:
-![Join Domain](./screenshots/join-domain.png)
-
-After restart, log in using the domain account.
-
-cmd:whoami
-
-
-## 📂 Folder Structure
-```
-ADDS-LAB/
-├── README.md
-├── /screenshots
-│   └── .gitkeep
-├── /scripts
-│   └── .gitkeep
-├── /notes
-│   └── .gitkeep
-└── /docs
-    └── .gitkeep
-```
-
-
-# 🧱 Active Directory Lab in VMware
-
-![VMware](https://img.shields.io/badge/VMware-0071C5?style=for-the-badge&logo=vmware&logoColor=white)
-![Windows Server 2022](https://img.shields.io/badge/Windows%20Server%202022-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-![Windows 11](https://img.shields.io/badge/Windows%2011-0078D6?style=for-the-badge&logo=windows11&logoColor=white)
-![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white)
-[Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
-[License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
-
 ---
 
 
@@ -256,10 +237,3 @@ Windows 11 Client,End-User Workstation,LAN Segment (Isolated)
 
 
 
-### Folder Descriptions
-- **/screenshots** → images used in documentation  
-- **/scripts** → setup or automation scripts  
-- **/notes** → personal notes or test results  
-- **/docs** → additional documentation or guides  
-
----
